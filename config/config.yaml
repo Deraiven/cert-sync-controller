@@ -1,5 +1,5 @@
 kong:
-  adminUrl: "http://kong-admin.k8s.shub.us"
+  adminUrl: "http://kong-admin.proxy:8001"
   adminToken: ""  # 如果启用了 RBAC
 
 controller:
