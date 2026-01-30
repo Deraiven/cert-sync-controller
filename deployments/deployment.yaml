@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kong-cert-sync
+  namespace: kong-cert-sync
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kong-cert-sync
+  template:
+    metadata:
+      labels:
+        app: kong-cert-sync
+    spec:
+      serviceAccountName: kong-cert-sync
+      containers:
+      - name: controller
+        image: your-registry/kong-cert-sync:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: health
+        env:
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
