@@ -6,7 +6,7 @@ controller:
   watchNamespace: "cert-manager"
   labelSelector: ""  # 为空表示同步所有证书
   resyncPeriod: "30m"
-  clusterName: "eks-test"
+  clusterName: "storehub-uat"
 
 logging:
   level: "info"

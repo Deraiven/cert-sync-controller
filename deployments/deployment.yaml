@@ -16,7 +16,7 @@ spec:
       serviceAccountName: kong-cert-sync
       containers:
       - name: controller
-        image: 858157298152.dkr.ecr.ap-southeast-1.amazonaws.com/kong-cert-sync:v1
+        image: 860545148515.dkr.ecr.ap-southeast-1.amazonaws.com/cert-sync:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
